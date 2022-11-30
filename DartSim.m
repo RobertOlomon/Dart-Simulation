@@ -1,6 +1,7 @@
 %All angles in radians, units in mkgs
-
+clear vars
 %Import reference results from Solidworks Fluid Simulation:
+load SimulationData.mat
 %Linspace of Initial Simulation
 RefVelocity1=linspace(20,10,8);
 RefMisalignmentAngle1=linspace(-0.1,0.1,30)';
@@ -29,13 +30,11 @@ Endtime=1.7;
 j=1;
 PlotPosition=zeros(length(0:Timestep:Endtime),2);
 PlotMisalignmentAngle=zeros(length(0:Timestep:Endtime),1);
-PlotNormForce=zeros(length(0:Timestep:Endtime),1);
 
 for t=0:Timestep:Endtime
 
     %Add iteration variables to plotting vectors
     PlotPosition(j,:)=Position;
-    PlotNormForce(j)=norm([ForceX,ForceY]);
     PlotMisalignmentAngle(j)=MisalignmentAngle;
 
     %Simulation
@@ -63,8 +62,3 @@ figure
 plot(0:Timestep:Endtime,PlotMisalignmentAngle)
 xlabel('Time (s)') 
 ylabel('Misalignment Angle (rad)') 
-figure
-plot(0:Timestep:Endtime,PlotNormForce)
-xlabel('Time (s)') 
-ylabel('Aerodynamic Force Magnitude (N)') 
-
